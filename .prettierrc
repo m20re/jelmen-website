@@ -10,5 +10,5 @@
   "jsxSingleQuote": false,
   "bracketSpacing": true,
   "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "app/globals.css"
+  "tailwindStylesheet": "app/styles/globals.css"
 }
