@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Navbar from '@/components/navbar';
 import HeroBanner from '@/components/hero_banner';
@@ -6,11 +8,11 @@ import HeroBanner from '@/components/hero_banner';
 
 export default function Page() {
   return (
-    <div className="min-h-full min-w-full px-2 py-6 md:px-4 lg:px-8">
+    <div className="flex min-h-screen flex-col pt-6 pb-0 md:px-4 lg:px-8">
       <nav>
         <Navbar />
       </nav>
-      <main>
+      <main className="grow">
         <HeroBanner />
         <div id="about-section" className="flex gap-2.5">
           <Image
@@ -23,7 +25,9 @@ export default function Page() {
           <p>Hi! My name is ..., and I'm not a cool person!</p>
         </div>
       </main>
-      <footer></footer>
+      <footer className="inline-flex justify-center bg-gray-500">
+        <p>Back to Top</p>
+      </footer>
     </div>
   );
 }
