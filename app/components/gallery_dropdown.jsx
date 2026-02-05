@@ -9,7 +9,7 @@ export default function GalleryDropdown() {
   const galleryOptions = [
     {
       id: 1,
-      title: 'Nature',
+      title: 'Placeholder 1',
       icon: <FontAwesomeIcon icon={faFolder} />,
     },
   ];
@@ -25,7 +25,7 @@ export default function GalleryDropdown() {
             initial={{ height: 0 }}
             animate={{ height: 'auto' }}
             exit={{ height: 0 }}
-            className="absolute top-full right-0 left-0 bg-yellow-600" // Add top-full
+            className="absolute top-full right-0 left-0 bg-yellow-600"
           >
             <div className="px-4 py-8">
               <div className="mx-auto grid max-w-4xl grid-cols-3 gap-6">
