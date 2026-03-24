@@ -8,6 +8,7 @@ import {
   faPaintbrush,
   faLink,
 } from '@fortawesome/free-solid-svg-icons';
+import AboutComponent from './components/about-component';
 
 // found at "/"
 
@@ -19,6 +20,7 @@ export default function Page() {
       id: 1,
       text: 'About',
       icon: <FontAwesomeIcon icon={faFaceSmile} size="2xl" />,
+      component: AboutComponent,
     },
     {
       id: 2,
@@ -66,6 +68,7 @@ export default function Page() {
         ></Image>
       </main>
     </div>
+
     // <div className="flex min-h-screen flex-col pt-6 pb-0 md:px-4 lg:px-8">
     //   <nav>
     //     <Navbar />
