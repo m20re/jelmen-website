@@ -22,23 +22,23 @@ export default function Page() {
   const SECTIONS = [
     {
       id: 1,
-      text: 'About',
+      title: 'About',
       icon: <FontAwesomeIcon icon={faFaceSmile} size="2xl" />,
       component: AboutComponent,
     },
     {
       id: 2,
-      text: 'Work',
+      title: 'Work',
       icon: <FontAwesomeIcon icon={faPaintbrush} size="2xl" />,
     },
     {
       id: 3,
-      text: 'Links',
+      title: 'Links',
       icon: <FontAwesomeIcon icon={faLink} size="2xl" />,
     },
     {
       id: 4,
-      text: 'Process',
+      title: 'Process',
       icon: (
         <Image
           src={'/skeleton-spinning.gif'}
@@ -103,9 +103,12 @@ export default function Page() {
       >
         {/* Title Bar */}
         <nav className="flex items-center justify-center gap-2 border-b border-black/40 bg-gray-200 px-3 py-1 select-none active:cursor-grabbing dark:bg-gray-700">
+          <span className="ml-4.5 flex-1 text-center text-sm">
+            {section.title}
+          </span>
           <div
             onClick={CloseWindow}
-            className="group flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border"
+            className="group flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border border-black/10 bg-red-500"
           >
             <span className="hidden text-[9px] leading-none font-bold text-red-900 group-hover:block">
               ✕
@@ -132,7 +135,7 @@ export default function Page() {
       <ThemeToggle />
       <div className="flex grow items-center justify-center self-stretch">
         <nav className="flex flex-col items-start justify-center gap-3">
-          {SECTIONS.map((section, index) => (
+          {SECTIONS.map(section => (
             <button
               key={section.id}
               className="inline-flex h-18 w-40 items-center justify-start gap-2 text-xl"
@@ -141,7 +144,7 @@ export default function Page() {
               <span className="max-h-20 max-w-14 rounded-xl border px-1 py-1">
                 {section.icon}
               </span>
-              <span className="font-bold">{section.text}</span>
+              <span className="font-bold">{section.title}</span>
             </button>
           ))}
         </nav>
