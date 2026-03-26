@@ -10,6 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Rnd } from 'react-rnd';
 import AboutComponent from './components/about-component';
+import ThemeToggle from './components/theme-toggle';
 
 // found at "/"
 
@@ -76,12 +77,13 @@ export default function Page() {
 
     return (
       <Rnd
-        dragHandleClassName="draggable"
+        disableDragging
+        enableResizing={false}
         className="overflow-hidden border border-black/20 shadow-lg"
         default={{ x: 0, y: 0, width: 400, height: 300 }}
       >
         {/* Title Bar */}
-        <nav className="draggable flex cursor-grab items-center justify-center gap-2 border-b border-black bg-gray-200 px-3 py-1 select-none active:cursor-grabbing dark:bg-gray-700">
+        <nav className="flex items-center justify-center gap-2 border-b border-black/40 bg-gray-200 px-3 py-1 select-none active:cursor-grabbing dark:bg-gray-700">
           <div
             onClick={CloseWindow}
             className="group flex h-3 w-3 cursor-pointer items-center justify-center rounded-full border"
@@ -107,44 +109,27 @@ export default function Page() {
   };
 
   return (
-    <div className="flex min-h-screen px-12 py-12">
-      <nav className="flex flex-col place-content-around">
-        {SECTIONS.map((section, index) => (
-          <button
-            key={section.id}
-            className="inline-flex items-center gap-2 text-xl"
-            onClick={() => OpenWindow(section.id)}
-          >
-            <span className="rounded-xl border px-1 py-1">{section.icon}</span>
-            <span className="font-bold">{section.text}</span>
-          </button>
-        ))}
-      </nav>
-      <main className="inline-flex grow items-center justify-center overflow-hidden">
-        <div>{renderContent()}</div>
-      </main>
+    <div className="flex min-h-screen flex-col px-12 py-12">
+      <ThemeToggle />
+      <div className="flex grow items-center justify-center">
+        <nav className="flex flex-col items-start justify-center gap-3">
+          {SECTIONS.map((section, index) => (
+            <button
+              key={section.id}
+              className="inline-flex h-18 w-40 items-center justify-start gap-2 text-xl"
+              onClick={() => OpenWindow(section.id)}
+            >
+              <span className="max-h-20 max-w-14 rounded-xl border px-1 py-1">
+                {section.icon}
+              </span>
+              <span className="font-bold">{section.text}</span>
+            </button>
+          ))}
+        </nav>
+        <main className="inline-flex grow items-center justify-center overflow-hidden">
+          <div>{renderContent()}</div>
+        </main>
+      </div>
     </div>
-
-    // <div className="flex min-h-screen flex-col pt-6 pb-0 md:px-4 lg:px-8">
-    //   <nav>
-    //     <Navbar />
-    //   </nav>
-    //   <main className="grow">
-    //     <HeroBanner />
-    //     <div id="about-section" className="flex gap-2.5">
-    //       <Image
-    //         className=""
-    //         src={'/sonic-evil-sonic.gif'}
-    //         width={250}
-    //         height={250}
-    //         alt="Placeholder-2"
-    //       ></Image>
-    //       <p>Hi! My name is ..., and I'm not a cool person!</p>
-    //     </div>
-    //   </main>
-    //   <footer className="inline-flex justify-center bg-gray-500">
-    //     <p>Back to Top</p>
-    //   </footer>
-    // </div>
   );
 }
