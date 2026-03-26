@@ -17,15 +17,7 @@ import ThemeToggle from './components/theme-toggle';
 export default function Page() {
   // "0" acts as the homepage
   const [currentWindow, setAsWindow] = useState(0);
-
-  const OpenWindow = id => {
-    if (id === currentWindow) return;
-    setAsWindow(id);
-  };
-
-  const CloseWindow = () => {
-    setAsWindow(0);
-  };
+  const [animState, setAnimState] = useState('idle');
 
   const SECTIONS = [
     {
@@ -58,6 +50,31 @@ export default function Page() {
     },
   ];
 
+  // defines the different animation states
+  const animClass = {
+    idle: '',
+    out: 'animate-slide-out-right',
+    in: 'animate-slide-in-right',
+  }[animState];
+
+  const OpenWindow = id => {
+    if (id === currentWindow) return;
+    setAnimState('out');
+    setTimeout(() => {
+      setAsWindow(id);
+      setAnimState('in');
+      setTimeout(() => setAnimState('idle'), 200);
+    }, 200);
+  };
+
+  const CloseWindow = () => {
+    setAnimState('out');
+    setTimeout(() => {
+      setAsWindow(0);
+      setAnimState('idle');
+    }, 200);
+  };
+
   // renders window specific content
   const renderContent = () => {
     if (currentWindow === 0) {
@@ -79,6 +96,8 @@ export default function Page() {
       <Rnd
         disableDragging
         enableResizing={false}
+        position={{ x: 0, y: 0 }}
+        size={{ width: '100%', height: '100%' }}
         className="overflow-hidden border border-black/20 shadow-lg"
         default={{ x: 0, y: 0, width: 400, height: 300 }}
       >
@@ -111,7 +130,7 @@ export default function Page() {
   return (
     <div className="flex min-h-screen flex-col px-12 py-12">
       <ThemeToggle />
-      <div className="flex grow items-center justify-center">
+      <div className="flex grow items-center justify-center self-stretch">
         <nav className="flex flex-col items-start justify-center gap-3">
           {SECTIONS.map((section, index) => (
             <button
@@ -126,8 +145,12 @@ export default function Page() {
             </button>
           ))}
         </nav>
-        <main className="inline-flex grow items-center justify-center overflow-hidden">
-          <div>{renderContent()}</div>
+        <main className="relative grow self-stretch overflow-hidden">
+          <div
+            className={`absolute inset-0 flex items-center justify-center ${animClass}`}
+          >
+            {renderContent()}
+          </div>
         </main>
       </div>
     </div>
