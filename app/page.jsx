@@ -50,6 +50,12 @@ export default function Page() {
     },
   ];
 
+  const SUBSECTIONS = [
+    {
+      id: 1,
+    },
+  ];
+
   // defines the different animation states
   const animClass = {
     idle: '',
@@ -131,18 +137,18 @@ export default function Page() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col px-4 py-8 md:px-12 md:py-12">
+    <div className="flex min-h-screen flex-col gap-2 px-4 py-4 md:gap-0 md:px-12 md:py-12">
       <ThemeToggle />
       <div className="flex grow flex-col items-center gap-4 self-stretch md:flex-row md:justify-center">
         <nav className="flex w-full flex-row flex-nowrap items-center justify-around gap-4 md:w-auto md:flex-col md:items-start md:justify-center">
           {SECTIONS.map(section => (
             <button
               key={section.id}
-              className="inline-flex h-16 w-auto items-center justify-start gap-2 text-lg md:h-18 md:w-40 md:text-xl"
+              className="md:flex-flex-nowrap inline-flex h-16 w-auto flex-wrap items-center justify-center text-lg md:h-18 md:w-40 md:justify-start md:gap-2 md:text-xl"
               onClick={() => OpenWindow(section.id)}
             >
-              <span className="max-h-20 max-w-14 rounded-xl border px-1 py-1">
-                {section.icon}
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border p-1 md:h-14 md:w-14">
+                <div className="scale-65 md:scale-100">{section.icon}</div>
               </span>
               <span className="font-bold">{section.title}</span>
             </button>
