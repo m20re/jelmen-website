@@ -35,3 +35,11 @@ next-env.d.ts
 
 package-lock.json
 pnpm-lock.yaml
+
+# cms
+.sanity
+
+# envs
+.env.*
+.env*
+env

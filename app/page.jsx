@@ -11,6 +11,7 @@ import {
 import { Rnd } from 'react-rnd';
 import AboutComponent from './components/about-component';
 import ThemeToggle from './components/theme-toggle';
+import WorkComponent from './components/works-component';
 
 // found at "/"
 
@@ -28,8 +29,9 @@ export default function Page() {
     },
     {
       id: 2,
-      title: 'Work',
+      title: 'Works',
       icon: <FontAwesomeIcon icon={faPaintbrush} size="2xl" />,
+      component: WorkComponent,
     },
     {
       id: 3,
