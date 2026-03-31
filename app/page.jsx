@@ -85,12 +85,15 @@ export default function Page() {
 
   // renders window specific content
   const renderContent = () => {
+    /* Main Window */
     if (currentWindow === 0) {
       return (
         <Image
           src={'/skeleton-mad-skeleton.gif'}
           width={500}
           height={500}
+          style={{width: "auto"}}
+          loading="eager"
           alt="Placeholder"
         ></Image>
       );
