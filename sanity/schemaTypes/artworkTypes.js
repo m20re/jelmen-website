@@ -31,5 +31,16 @@ export const artworkTypes = {
       type: 'url',
       description: 'Link to the live project or GitHub repo',
     },
+    {
+      name: 'tags',
+      title: 'Tags',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'tag'}],
+        }
+      ]
+    },
   ],
 };
