@@ -67,14 +67,38 @@ export default function WorkComponent({ onClose }) {
       </div>
 
       <main className="grid h-full grid-cols-2 gap-4 overflow-y-auto md:grid-cols-3">
-        {artworks.map(artwork => (
+        {filtered.map(artwork => (
           <div
             key={artwork._id}
             className="border-border border-border overflow-hidden rounded-xl border"
           >
-            {artwork.imageUrl && (
-              <img src={artwork.imageUrl} alt={artwork.title} />
+            {artwork.tags?.[0] && (
+              <div className="flex flex-wrap gap-1 p-2">
+                {artwork.tags?.map(tag => (
+                  <span
+                    key={artwork._id}
+                    className="m-2 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800"
+                  >
+                    #{artwork.tags[0].label}
+                  </span>
+                ))}
+              </div>
             )}
+            {artwork.imageUrl && (
+              <img
+                src={artwork.imageUrl}
+                alt={artwork.title}
+                className="w-full object-cover"
+              />
+            )}
+            <div className="p-2">
+              <p className="text-sm font-medium">{artwork.title}</p>
+              {artwork.description && (
+                <p className="text-muted-foreground text-xs">
+                  {artwork.description}
+                </p>
+              )}
+            </div>
           </div>
         ))}
       </main>
