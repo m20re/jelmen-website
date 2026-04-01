@@ -14,6 +14,7 @@ export default function WorkComponent({ onClose }) {
   // upon new art, reload the page
   const [artworks, setArtworks] = useState([]);
   const [tags, setTags] = useState([]);
+  const [activeTag, setActiveTag] = useState('all');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,23 +36,42 @@ export default function WorkComponent({ onClose }) {
     client.fetch(tagQuery).then(data => setTags(data));
   }, []);
 
+  // populate the variables with artworks
+  const filtered =
+    activeTag === 'all'
+      ? artworks
+      : artworks.filter(a => a.tags?.some(t => t.label === activeTag));
+
   if (loading) {
     return <div>Loading artwork...</div>;
   }
 
   return (
-    <div className="flex min-w-full flex-col">
-      <div id="tags" className="flex gap-3 overflow-hidden md:gap-4">
-        {tags.map((tag, index) => (
-          <button key={index} className="rounded-xl border px-2 py-2">
-            {tag.label}
+    <div className="flex min-w-full flex-col gap-2">
+      <div className="scrollbar-none flex gap-2 overflow-x-auto pb-1">
+        <button
+          onClick={() => setActiveTag('all')}
+          className={`shrink-0 rounded-full border px-3 py-1 text-sm transition-colors ${activeTag === 'all' ? 'border-blue-400 bg-blue-100 text-blue-800' : 'border-border text-muted'}`}
+        >
+          all
+        </button>
+        {tags.map(tag => (
+          <button
+            key={tag.label}
+            onClick={() => setActiveTag(tag.label)}
+            className={`shrink-0 rounded-full border px-3 py-1 text-sm transition-colors ${activeTag === tag.label ? 'border-blue-400 bg-blue-100 text-blue-800' : 'border-border text-muted'}`}
+          >
+            #{tag.label}
           </button>
         ))}
       </div>
 
       <main className="grid h-full grid-cols-2 gap-4 overflow-y-auto md:grid-cols-3">
         {artworks.map(artwork => (
-          <div key={artwork._id}>
+          <div
+            key={artwork._id}
+            className="border-border border-border overflow-hidden rounded-xl border"
+          >
             {artwork.imageUrl && (
               <img src={artwork.imageUrl} alt={artwork.title} />
             )}
