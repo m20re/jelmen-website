@@ -29,11 +29,13 @@ export default function WorkComponent({ onClose }) {
     // get tag for each artwork
     const tagQuery = `*[_type == "tag"] { label }`;
 
-    client.fetch(query).then(data => {
-      setArtworks(data);
-      setLoading(false);
-    });
-    client.fetch(tagQuery).then(data => setTags(data));
+    Promise.all([client.fetch(query), client.fetch(tagQuery)]).then(
+      ([artworkData, tagData]) => {
+        setArtworks(artworkData);
+        setTags(tagData);
+        setLoading(false);
+      }
+    );
   }, []);
 
   // populate the variables with artworks
@@ -72,24 +74,19 @@ export default function WorkComponent({ onClose }) {
             key={artwork._id}
             className="border-border border-border overflow-hidden rounded-xl border"
           >
-            {artwork.tags?.[0] && (
-              <div className="flex flex-wrap gap-1 p-2">
-                {artwork.tags?.map(tag => (
-                  <span
-                    key={artwork._id}
-                    className="m-2 inline-block rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800"
-                  >
+            {artwork.imageUrl && (
+              <div className="relative">
+                <img
+                  src={artwork.imageUrl}
+                  alt={artwork.title}
+                  className="w-full object-cover"
+                />
+                {artwork.tags?.[0] && (
+                  <span className="absolute top-2 left-2 rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800">
                     #{artwork.tags[0].label}
                   </span>
-                ))}
+                )}
               </div>
-            )}
-            {artwork.imageUrl && (
-              <img
-                src={artwork.imageUrl}
-                alt={artwork.title}
-                className="w-full object-cover"
-              />
             )}
             <div className="p-2">
               <p className="text-sm font-medium">{artwork.title}</p>
