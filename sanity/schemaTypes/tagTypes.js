@@ -7,7 +7,7 @@ export const tagTypes = {
       name: 'label',
       title: 'Label',
       type: 'string',
-      validation: Rule => Rule.required()
-    }
-  ]
+      validation: Rule => Rule.required(),
+    },
+  ],
 };

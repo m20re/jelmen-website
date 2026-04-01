@@ -38,9 +38,9 @@ export const artworkTypes = {
       of: [
         {
           type: 'reference',
-          to: [{ type: 'tag'}],
-        }
-      ]
+          to: [{ type: 'tag' }],
+        },
+      ],
     },
   ],
 };

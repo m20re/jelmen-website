@@ -92,7 +92,7 @@ export default function Page() {
           src={'/skeleton-mad-skeleton.gif'}
           width={500}
           height={500}
-          style={{width: "auto"}}
+          style={{ width: 'auto' }}
           loading="eager"
           alt="Placeholder"
         ></Image>
