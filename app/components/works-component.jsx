@@ -40,21 +40,23 @@ export default function WorkComponent({ onClose }) {
   }
 
   return (
-    <div className="flex flex-col">
-      <div id="tags" className='min-w-full'>
+    <div className="flex min-w-full flex-col">
+      <div id="tags" className="flex gap-3 overflow-hidden md:gap-4">
         {tags.map((tag, index) => (
-          <button key={index}>{tag.label}</button>
+          <button key={index} className="rounded-xl border px-2 py-2">
+            {tag.label}
+          </button>
         ))}
       </div>
 
-    <main className="grid h-full grid-cols-2 gap-4 overflow-y-auto md:grid-cols-3">
-      {artworks.map(artwork => (
-        <div key={artwork._id}>
-          {artwork.imageUrl && (
-            <img src={artwork.imageUrl} alt={artwork.title} />
-          )}
-        </div>
-      ))}
+      <main className="grid h-full grid-cols-2 gap-4 overflow-y-auto md:grid-cols-3">
+        {artworks.map(artwork => (
+          <div key={artwork._id}>
+            {artwork.imageUrl && (
+              <img src={artwork.imageUrl} alt={artwork.title} />
+            )}
+          </div>
+        ))}
       </main>
     </div>
   );
