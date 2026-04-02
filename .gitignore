@@ -40,6 +40,4 @@ pnpm-lock.yaml
 .sanity
 
 # envs
-.env.*
-.env*
-env
+.env.local
