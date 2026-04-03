@@ -12,6 +12,8 @@ import { Rnd } from 'react-rnd';
 import AboutComponent from './components/about-component';
 import ThemeToggle from './components/theme-toggle';
 import WorkComponent from './components/works-component';
+import { component } from 'sanity/structure';
+import LinkComponent from './components/links-component';
 
 // found at "/"
 
@@ -37,18 +39,7 @@ export default function Page() {
       id: 3,
       title: 'Links',
       icon: <FontAwesomeIcon icon={faLink} size="2xl" />,
-    },
-    {
-      id: 4,
-      title: 'Process',
-      icon: (
-        <Image
-          src={'/skeleton-spinning.gif'}
-          width={50}
-          height={50}
-          alt="spinny-guy"
-        ></Image>
-      ),
+      component: LinkComponent,
     },
   ];
 
